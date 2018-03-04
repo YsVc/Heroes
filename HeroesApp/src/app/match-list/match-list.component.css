@@ -1,0 +1,18 @@
+.match-list td {
+  cursor: pointer;
+}
+
+tr.active {
+  background-color: #fff0dd !important;  
+}
+
+.match-list .match-details, .matchEntry-details td{
+  cursor: default !important;
+  text-align:left; 
+  vertical-align:middle;
+}
+
+.card-img {
+  height: 90px;
+  object-fit: cover;
+}

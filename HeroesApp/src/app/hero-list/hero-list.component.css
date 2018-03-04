@@ -1,0 +1,19 @@
+thead th {
+  cursor: pointer;
+  margin-right: 15px;
+  margin-left: 15px;
+  color: #d1d1d1
+}
+
+  thead th span {
+    visibility: hidden;
+    
+  }
+
+  thead th.active {
+    color: #ffffff;
+  }
+
+    thead th.active span {
+      visibility: visible;
+    }

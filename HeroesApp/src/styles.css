@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+.card {
+  margin: 1px 1px 5px 1px;
+}
+
+.hero-name {
+  text-align: center;
+  padding: 5px !important;
+}
+
+  .hero-name h5 {
+    margin-bottom: 2px !important;
+    text-decoration: none !important;
+  }
+
+.hero-portrait {
+  margin-right: 10px !important;
+}
+
+.oi-caret-bottom, .oi-caret-top {
+  font-size: 10px;
+}

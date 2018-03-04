@@ -1,0 +1,41 @@
+<table class="table table-hover table-sm">
+  <thead class="thead-dark">
+  <tr>
+    <th (click)="setOrder('id')"
+        [class.active]="sortKey === 'id'" style="width: 40px;">
+      <span [hidden]="!sortIsReversed" class="oi oi-caret-top"></span>
+      <span [hidden]="sortIsReversed" class="oi oi-caret-bottom"></span>
+      ID
+    </th>
+    <th (click)="setOrder('name')"
+        [class.active]="sortKey === 'name'">
+      <span [hidden]="!sortIsReversed" class="oi oi-caret-top"></span>
+      <span [hidden]="sortIsReversed" class="oi oi-caret-bottom"></span>
+      Name
+    </th>
+    <th (click)="setOrder('winrate')"
+        [class.active]="sortKey === 'winrate'">
+      <span [hidden]="!sortIsReversed" class="oi oi-caret-top"></span>
+      <span [hidden]="sortIsReversed" class="oi oi-caret-bottom"></span>
+      Winrate
+    </th>
+    <th (click)="setOrder('kdaRatio')"
+        [class.active]="sortKey === 'kdaRatio'">
+      <span [hidden]="!sortIsReversed" class="oi oi-caret-top"></span>
+      <span [hidden]="sortIsReversed" class="oi oi-caret-bottom"></span>
+      KDA Ratio
+    </th>
+    <th style="width: 250px;">Favorite hero</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let player of players | orderBy : sortKey : sortIsReversed : 'case-insensitive'">
+      <td>{{player.id}}</td>
+      <td>{{player.name}}</td>
+      <td>{{player.winrate | percent}}<p><ngb-progressbar type="success" [value]="player.winrate" [max]="maxWinrate" height=".5rem"></ngb-progressbar></p></td>
+      <td>{{player.kdaRatio | number:'1.2-2'}}<p><ngb-progressbar type="danger" [value]="player.kdaRatio" [max]="maxKda" height=".5rem"></ngb-progressbar></p></td>
+      <td><img src="{{player.favHero.getHeroPortraitPath()}}" width="80" class="hero-portrait" />{{player.favHero.name}}</td>
+    </tr>
+  </tbody>
+</table>

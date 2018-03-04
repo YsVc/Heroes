@@ -1,0 +1,39 @@
+<table class="table table-hover table-sm">
+  <thead class="thead-dark">
+  <tr>
+    <th (click)="setOrder('name')"
+        [class.active]="sortKey === 'name'">
+      <span [hidden]="!sortIsReversed" class="oi oi-caret-top"></span>
+      <span [hidden]="sortIsReversed" class="oi oi-caret-bottom"></span>
+      Name
+    </th>
+    <th (click)="setOrder('winrate')"
+        [class.active]="sortKey === 'winrate'">
+      <span [hidden]="!sortIsReversed" class="oi oi-caret-top"></span>
+      <span [hidden]="sortIsReversed" class="oi oi-caret-bottom"></span>
+      Winrate
+    </th>
+    <th (click)="setOrder('popularity')"
+        [class.active]="sortKey === 'popularity'">
+      <span [hidden]="!sortIsReversed" class="oi oi-caret-top"></span>
+      <span [hidden]="sortIsReversed" class="oi oi-caret-bottom"></span>
+      Popularity
+    </th>
+    <th (click)="setOrder('kdaRatio')"
+        [class.active]="sortKey === 'kdaRatio'">
+      <span [hidden]="!sortIsReversed" class="oi oi-caret-top"></span>
+      <span [hidden]="sortIsReversed" class="oi oi-caret-bottom"></span>
+      KDA Ratio
+    </th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let hero of heroes | orderBy : sortKey : sortIsReversed : 'case-insensitive'">
+      <td><img src="{{hero.getHeroPortraitPath()}}" width="80" class="hero-portrait"/>{{hero.name}}</td>
+      <td>{{hero.winrate | percent}}<p><ngb-progressbar type="success" [value]="hero.winrate" [max]="maxWinrate" height=".5rem"></ngb-progressbar></p></td>
+      <td>{{hero.popularity | percent}}<p><ngb-progressbar type="warning" [value]="hero.popularity" [max]="maxPopularity" height=".5rem"></ngb-progressbar></p></td>
+      <td>{{hero.kdaRatio | number:'1.2-2'}}<p><ngb-progressbar type="danger" [value]="hero.kdaRatio" [max]="maxKda" height=".5rem"></ngb-progressbar></p></td>
+    </tr>
+  </tbody>
+</table>

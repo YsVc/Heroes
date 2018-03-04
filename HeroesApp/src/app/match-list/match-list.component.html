@@ -1,0 +1,81 @@
+<table class="table match-list">
+  <thead>
+    <tr>
+      <th>Match ID</th>
+      <th>Map</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let match of matches">
+      <tr (click)="selectMatch(match.id)" [class.active]="match.id === selectedMatch">
+        <td>
+          <span [hidden]="match.id === selectedMatch" class="oi oi-caret-bottom"></span>
+          <span [hidden]="match.id !== selectedMatch" class="oi oi-caret-top"></span>
+          #{{match.id}}
+        </td>
+        <td>{{match.map.fullName}}</td>
+        <td>{{match.duration | secondsConverter}}</td>
+      </tr>
+
+    <tr *ngIf="selectedMatch === match.id">
+      <td colspan="3" class="match-details">
+        <div class="card bg-dark text-white">
+          <img class="card-img" src="{{match.map.getPreviewPath()}}" alt="Card image">
+          <div class="card-img-overlay">
+            <h5 class="card-title">{{match.map.fullName | uppercase}}</h5>
+            <h6 class="card-title" *ngIf="match.isBlueTeamWon">THE BLUE TEAM WON</h6>
+            <h6 class="card-title" *ngIf="!match.isBlueTeamWon">THE RED TEAM WON</h6>
+          </div>
+        </div>
+        <h6>THE BLUE TEAM</h6>
+        <table class="table table-sm table-hover fixed">
+          <thead>
+            <tr class="table-primary">
+              <th style="width: 150px;">Player</th>
+              <th>Hero</th>
+              <th style="width: 50px;">Kills</th>
+              <th style="width: 50px;">Assists</th>
+              <th style="width: 50px;">Deaths</th>
+              <th style="width: 50px;">KDA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let matchEntry of match.blueTeam" class="matchEntry-details">
+              <td>{{matchEntry.player.name}}#{{matchEntry.player.id}}</td>
+              <td><img src="{{matchEntry.hero.getHeroPortraitPath()}}" width="80" class="hero-portrait" />{{matchEntry.hero.name}}</td>
+              <td>{{matchEntry.kills}}</td>
+              <td>{{matchEntry.assists}}</td>
+              <td>{{matchEntry.deaths}}</td>
+              <td>{{matchEntry.kda | number:'1.2-2'}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h6>THE RED TEAM</h6>
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr class="table-danger">
+              <th style="width: 150px;">Player</th>
+              <th>Hero</th>
+              <th style="width: 50px;">Kills</th>
+              <th style="width: 50px;">Assists</th>
+              <th style="width: 50px;">Deaths</th>
+              <th style="width: 50px;">KDA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let matchEntry of match.redTeam" class="matchEntry-details">
+              <td>{{matchEntry.player.name}}#{{matchEntry.player.id}}</td>
+              <td><img src="{{matchEntry.hero.getHeroPortraitPath()}}" width="80" class="hero-portrait" />{{matchEntry.hero.name}}</td>
+              <td>{{matchEntry.kills}}</td>
+              <td>{{matchEntry.assists}}</td>
+              <td>{{matchEntry.deaths}}</td>
+              <td>{{matchEntry.kda | number:'1.2-2'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    </ng-container>
+  </tbody>
+</table>
